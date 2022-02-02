@@ -13,7 +13,7 @@ class HomeApp extends StatelessWidget {
       body: const Center(
         child: Text('home'),
       ),
-      drawer: DrawerCustom(),
+      drawer: const DrawerCustom(),
     );
   }
 }

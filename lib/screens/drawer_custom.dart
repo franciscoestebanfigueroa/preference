@@ -34,7 +34,7 @@ class DrawerCustom extends StatelessWidget {
                             Navigator.pop(context);
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return HomeApp();
+                              return const HomeApp();
                             }));
                           }),
                       _Lineas(
@@ -62,8 +62,6 @@ class DrawerCustom extends StatelessWidget {
                                         Animation<double> animation,
                                         ____,
                                         Widget child) {
-                                      //TODO:eliminar
-                                      print(animation.value);
                                       return FadeTransition(
                                         opacity: animation,
                                         child: child,
