@@ -39,14 +39,14 @@ class DrawerCustom extends StatelessWidget {
                           }),
                       _Lineas(
                           icon: Icons.person_pin,
-                          title: 'Gente',
+                          title: 'Seting',
                           onTap: () {
                             Navigator.pop(context);
                             Navigator.pushNamed(context, SetingApp.router);
                           }),
                       _Lineas(
                           icon: Icons.build,
-                          title: 'Seting',
+                          title: 'No SE',
                           onTap: () {
                             Navigator.pop(context);
                             Navigator.push(
