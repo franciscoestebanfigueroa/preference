@@ -9,36 +9,43 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
-  static late SharedPreferences prefs;
+  Preferences._();
+  static Preferences datapreference = Preferences._();
+
+  static late SharedPreferences _prefs;
 
   static bool _tema = true;
   static String _nombre = 'nombre';
   static int _genero = 1;
 
-  bool get tema {
-    return _tema;
+  static Future<void> init() async {
+    _prefs = await SharedPreferences.getInstance();
   }
 
-  settema(bool x) async {
-    await prefs.setBool('tema', x);
+  bool get tema {
+    return _prefs.getBool('tema') ?? true;
+  }
+
+  set tema(bool x) {
+    _prefs.setBool('tema', x);
     _tema = x;
   }
 
   String get nombre {
-    return _nombre;
+    return _prefs.getString('nombre') ?? 'no hay data';
   }
 
-  setnombre(String x) async {
-    await prefs.setString('nombre', x);
+  set nombre(String x) {
+    _prefs.setString('nombre', x);
     _nombre = x;
   }
 
   int get genero {
-    return _genero;
+    return _prefs.getInt('genero') ?? 1;
   }
 
-  setgenero(int x) async {
-    await prefs.setInt('genero', x);
+  set genero(int x) {
+    _prefs.setInt('genero', x);
     _genero = x;
   }
 }

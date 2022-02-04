@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:preference/prefereces.dart';
 import 'package:preference/screens/drawer_custom.dart';
 
 class HomeApp extends StatelessWidget {
@@ -8,10 +9,18 @@ class HomeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final x = Preferences.datapreference;
+
     return Scaffold(
       appBar: AppBar(),
-      body: const Center(
-        child: Text('home'),
+      body: Center(
+        child: Column(
+          children: [
+            Text(x.nombre.toString()),
+            Text(x.genero == 1 ? 'masculino' : 'Femenino'),
+            Text(x.tema == true ? 'Dark' : 'Light'),
+          ],
+        ),
       ),
       drawer: const DrawerCustom(),
     );

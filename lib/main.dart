@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:preference/prefereces.dart';
+import 'package:preference/providers/provider_theme.dart';
 import 'package:preference/screens/screens.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding();
+  WidgetsFlutterBinding.ensureInitialized();
 
-  Preferences.prefs = await SharedPreferences.getInstance();
-  Preferences.prefs.getInt('genero') ?? 1;
-  Preferences.prefs.getString('nombre') ?? 'nombre';
-  Preferences.prefs.getBool('tema') ?? true;
-
-//  int counter = (prefs.getInt('counter') ?? 0) + 1;
+  await Preferences.init();
+  //  int counter = (prefs.getInt('counter') ?? 0) + 1;
 //  print('Pressed $counter times.');
 //  await prefs.setInt('counter', counter);
 
-  runApp(const MyApp());
+  return runApp(const ProviderMyApp());
+}
+
+class ProviderMyApp extends StatelessWidget {
+  const ProviderMyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ProviderTheme>(create: (context) {
+          return ProviderTheme();
+        })
+      ],
+      child: const MyApp(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +36,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pthemedata = Provider.of<ProviderTheme>(context);
+
     return MaterialApp(
+      theme: pthemedata.tema ? ThemeData.dark() : ThemeData.light(),
       initialRoute: HomeApp.router,
       routes: rutas,
     );
